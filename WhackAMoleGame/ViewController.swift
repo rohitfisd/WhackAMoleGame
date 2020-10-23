@@ -1,1 +1,34 @@
+//
+//  ViewController.swift
+//  WhackAMole
+//
+//  Created by Ramarathinam, Rohit on 10/21/20.
+//  Copyright © 2020 Ramarathinam, Rohit. All rights reserved.
+//
 
+import UIKit
+
+class ViewController: UIViewController {
+    
+    var score = UILabel()
+    var background = UILabel()
+    var screenWidth = 0
+    var screenHeight = 0
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        // Do any additional setup after loading the view.
+        let screenBounds: CGRect = UIScreen.main.bounds
+        screenWidth = Int(screenBounds.width)
+        screenHeight = Int(screenBounds.height)
+        
+        score.frame = CGRect(x: 0, y: 0, width: screenHeight/10, height: screenHeight/10)
+        score.text = "0"
+        view.addSubview(score)
+        
+        background.frame = CGRect(x: 0, y: screenHeight/10, width: screenWidth, height: screenHeight-(screenHeight/10))
+        background.backgroundColor = UIColor.green
+        view.addSubview(background)
+        
+    }
+}
