@@ -10,6 +10,7 @@ import UIKit
 
 class ViewController: UIViewController {
     
+    var count = 0
     var mole = UIButton()
     var score = UILabel()
     var background = UILabel()
@@ -41,5 +42,7 @@ class ViewController: UIViewController {
     
     @objc func hitMe(_ sender:UIButton!) {
         print("Got 'em!!")
+        count+=1
+        score.text = "\(count)"
     }
 }
