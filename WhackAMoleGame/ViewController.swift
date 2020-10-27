@@ -44,5 +44,6 @@ class ViewController: UIViewController {
         print("Got 'em!!")
         count+=1
         score.text = "\(count)"
+        mole.removeFromSuperview()
     }
 }
