@@ -10,6 +10,7 @@ import UIKit
 
 class ViewController: UIViewController {
     
+    var timer = Timer()
     var count = 0
     var mole = UIButton()
     var score = UILabel()
@@ -38,6 +39,8 @@ class ViewController: UIViewController {
         mole.addTarget(self, action: #selector(hitMe(_:)), for: .touchUpInside)
         
         view.addSubview(mole)
+        
+        timer = Timer.scheduledTimer(timeInterval: 5.0, target: self, selector: #selector(makeNewMole), userInfo: nil, repeats: true)
     }
     
     @objc func hitMe(_ sender:UIButton!) {
@@ -45,6 +48,8 @@ class ViewController: UIViewController {
         count+=1
         score.text = "\(count)"
         mole.removeFromSuperview()
+        timer.invalidate()
+        
     
         //new mole to appear
         let randomX = Int.random(in: 0...(screenWidth-30))
@@ -53,5 +58,9 @@ class ViewController: UIViewController {
         mole.backgroundColor = UIColor.brown
         mole.layer.cornerRadius = 15
         view.addSubview(mole)
+    }
+    
+    @objc func makeNewMole(_ sender:UIButton!) {
+        mole.removeFromSuperview()
     }
 }
