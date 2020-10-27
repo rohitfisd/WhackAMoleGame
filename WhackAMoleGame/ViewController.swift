@@ -45,5 +45,13 @@ class ViewController: UIViewController {
         count+=1
         score.text = "\(count)"
         mole.removeFromSuperview()
+    
+        //new mole to appear
+        let randomX = Int.random(in: 0...(screenWidth-30))
+        let randomY = Int.random(in: (screenHeight/10)...(screenHeight-30))
+        mole.frame = CGRect(x: randomX, y: randomY, width: 30, height: 30)
+        mole.backgroundColor = UIColor.brown
+        mole.layer.cornerRadius = 15
+        view.addSubview(mole)
     }
 }
