@@ -62,5 +62,6 @@ class ViewController: UIViewController {
     
     @objc func makeNewMole(_ sender:UIButton!) {
         mole.removeFromSuperview()
+        
     }
 }
