@@ -10,6 +10,7 @@ import UIKit
 
 class ViewController: UIViewController {
     
+    var mole = UIButton()
     var score = UILabel()
     var background = UILabel()
     var screenWidth = 0
@@ -30,6 +31,15 @@ class ViewController: UIViewController {
         background.backgroundColor = UIColor.green
         view.addSubview(background)
         
+        mole.frame = CGRect(x: 0, y: screenHeight/10, width: 30, height: 30)
+        mole.backgroundColor = UIColor.brown
+        mole.layer.cornerRadius = 15
+        mole.addTarget(self, action: #selector(hitMe(_:)), for: .touchUpInside)
         
+        view.addSubview(mole)
+    }
+    
+    @objc func hitMe(_ sender:UIButton!) {
+        print("Got 'em!!")
     }
 }
