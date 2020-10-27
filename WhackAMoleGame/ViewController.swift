@@ -10,6 +10,7 @@ import UIKit
 
 class ViewController: UIViewController {
     
+    var molecount = 0
     var timer = Timer()
     var count = 0
     var mole = UIButton()
@@ -24,6 +25,8 @@ class ViewController: UIViewController {
         let screenBounds: CGRect = UIScreen.main.bounds
         screenWidth = Int(screenBounds.width)
         screenHeight = Int(screenBounds.height)
+        let randomX = Int.random(in: 0...(screenWidth-30))
+        let randomY = Int.random(in: (screenHeight/10)...(screenHeight-30))
         
         score.frame = CGRect(x: 0, y: 0, width: screenHeight/10, height: screenHeight/10)
         score.text = "0"
@@ -33,34 +36,55 @@ class ViewController: UIViewController {
         background.backgroundColor = UIColor.green
         view.addSubview(background)
         
-        mole.frame = CGRect(x: 0, y: screenHeight/10, width: 30, height: 30)
+        mole.frame = CGRect(x: randomX, y: randomY, width: 30, height: 30)
         mole.backgroundColor = UIColor.brown
         mole.layer.cornerRadius = 15
         mole.addTarget(self, action: #selector(hitMe(_:)), for: .touchUpInside)
         
         view.addSubview(mole)
         
-        timer = Timer.scheduledTimer(timeInterval: 5.0, target: self, selector: #selector(makeNewMole), userInfo: nil, repeats: true)
+        timer = Timer.scheduledTimer(timeInterval: 3.0, target: self, selector: #selector(makeNewMole), userInfo: nil, repeats: true)
     }
     
     @objc func hitMe(_ sender:UIButton!) {
-        print("Got 'em!!")
+        //print("Got 'em!!")
+        molecount+=1
         count+=1
         score.text = "\(count)"
         mole.removeFromSuperview()
         timer.invalidate()
-        
+        timer = Timer.scheduledTimer(timeInterval: 3.0, target: self, selector: #selector(makeNewMole), userInfo: nil, repeats: true)
     
-        //new mole to appear
-        let randomX = Int.random(in: 0...(screenWidth-30))
-        let randomY = Int.random(in: (screenHeight/10)...(screenHeight-30))
-        mole.frame = CGRect(x: randomX, y: randomY, width: 30, height: 30)
-        mole.backgroundColor = UIColor.brown
-        mole.layer.cornerRadius = 15
-        view.addSubview(mole)
+        if molecount<10 {
+            //new mole to appear
+            let randomX = Int.random(in: 0...(screenWidth-30))
+            let randomY = Int.random(in: (screenHeight/10)...(screenHeight-30))
+            mole.frame = CGRect(x: randomX, y: randomY, width: 30, height: 30)
+            mole.backgroundColor = UIColor.brown
+            mole.layer.cornerRadius = 15
+            view.addSubview(mole)
+        } else {
+            //print("Game over!")
+            mole.removeFromSuperview()
+        }
     }
     
     @objc func makeNewMole(_ sender:UIButton!) {
         mole.removeFromSuperview()
+        molecount+=1
+        timer.invalidate()
+        timer = Timer.scheduledTimer(timeInterval: 3.0, target: self, selector: #selector(makeNewMole), userInfo: nil, repeats: true)
+        if molecount<10 {
+            //new mole to appear
+            let randomX = Int.random(in: 0...(screenWidth-30))
+            let randomY = Int.random(in: (screenHeight/10)...(screenHeight-30))
+            mole.frame = CGRect(x: randomX, y: randomY, width: 30, height: 30)
+            mole.backgroundColor = UIColor.brown
+            mole.layer.cornerRadius = 15
+            view.addSubview(mole)
+        } else {
+            //print("Game over!")
+            mole.removeFromSuperview()
+        }
     }
 }
